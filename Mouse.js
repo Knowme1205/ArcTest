@@ -29,8 +29,8 @@ class Mouse{
     trigger (event,e)
     {
         const callbacks = this.subs[event];
-        callbacks&&callbacks.array.forEach(cb =>cb(e));
-    };
+       if (callbacks) { callbacks.forEach(cb => cb(e)); };
+    }
     
 
     onMouseUp(e)
