@@ -1,4 +1,4 @@
-class Mouse{
+ class Mouse{
     constructor(obj)
     {
         this.obj= obj;
@@ -7,9 +7,9 @@ class Mouse{
         this.left= false;
         this.subs = {};
 
-        this.handle (event =>'mousedown ', (e) => this.onMouseDown(e));
-        this.handle (event =>'mouseup ', (e) => this.onMouseUp(e));
-        this.handle (event=>'mousemove ', (e) => this.onMouseMove(e));
+        this.handle ('mousedown', (e) => this.onMouseDown(e));
+        this.handle ('mouseup', (e) => this.onMouseUp(e));
+        this.handle ('mousemove', (e) => this.onMouseMove(e));
 
     }
 
@@ -45,8 +45,16 @@ class Mouse{
     }
     onMouseMove(e)
     {
-        this.x=e.layerX;
-        this.y=e.layerY;
+       const rect = this.obj.getBoundingClientRect();
+        
+        // Вычисляем позицию
+        let x = e.clientX - rect.left;
+        let y = e.clientY - rect.top;
+        
+   
+        
+        this.x = x;
+        this.y = y;
     }
 
     onMouseEvent(e,callback)
@@ -55,5 +63,4 @@ class Mouse{
     }
 
     
-}
-export default Mouse;
+} export default Mouse; 

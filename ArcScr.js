@@ -11,6 +11,13 @@ class Arcanoid
         this.ctx= this.canvas.getContext('2d');
         this.mouse= new Mouse(this.canvas);
 
+        this.platform = {
+            x: canvas.width / 2 - 50, 
+            y: canvas.height - 100,
+            width: 100,
+            height: 20,
+            
+        };
         const map=this.map = {
             bricks: [],
             brickWidth:80,
@@ -22,7 +29,7 @@ class Arcanoid
     }
     run(){
         this.mouse.on('mousedown',e=> this.onMouseDown(e));
-        this.mouse.on('mousemove',e=> this.onMouseDown(e));
+        this.mouse.on('mousemove',e=> this.onMouseMove(e));
         this.unpause();
         this.render();
     }
@@ -42,14 +49,21 @@ class Arcanoid
     
     render(){
         if (this.state !== 'pause')
-        {
+        {   
             this.clearScreen();
+
+            this.movePlatform();
             this.renderMap();
-            this.renderPlayer();
+            this.renderPlayerPlatform();
+            console.log('render');
             window.requestAnimationFrame(() => this.render());
         }
     }
 
+    renderMap(){
+        const {map} = this;
+        const {bricks}= map;
+    }
     pause(){
         this.state='pause';
     }
@@ -64,4 +78,26 @@ class Arcanoid
         const {width,height}= canvas;
         ctx.clearRect(0,0,width,height);
     }
+
+    renderPlayerPlatform(){
+        const {platform: {x,y,width,height}, ctx} = this;
+        ctx.fillStyle= "red";
+        ctx.fillRect(x, y, width,height);
+    }
+
+    movePlatform(){
+         const { platform, mouse, canvas } = this;
+    
+    let newX = mouse.x - platform.width / 2;
+    
+    if (newX < 0) {
+        newX = 0;
+    } else if (newX + platform.width > canvas.width) {
+        newX = canvas.width - platform.width;
+    }
+    
+    platform.x = newX;
+    }
 }
+
+export default Arcanoid;

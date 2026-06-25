@@ -8,6 +8,11 @@
         <script type="module" src="ArcScr.js"></script>
     </head>
     <body>
-        <canvas id="game" tabindex="1" width="800" height="600"></canvas>
+        <canvas id="game" tabindex="1" width="600" height="800"></canvas>
+         <script type="module">
+        import Arcanoid from './ArcScr.js';
+        const game = new Arcanoid('game');
+        game.run(); // Без этого ничего не будет!
+    </script>
     </body>
 </html>
