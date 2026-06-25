@@ -1,6 +1,9 @@
 #game{
-border: 2px solid blue;
+border: 2px solid #ff6b6b;
 display: block;
 margin: auto;
 
+}
+body{
+     background: linear-gradient(135deg, #858bdb 0%, #1a1a3e 100%);
 }
