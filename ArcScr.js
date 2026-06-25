@@ -87,16 +87,17 @@ class Arcanoid
 
     movePlatform(){
          const { platform, mouse, canvas } = this;
-    
-    let newX = mouse.x - platform.width / 2;
-    
-    if (newX < 0) {
-        newX = 0;
-    } else if (newX + platform.width > canvas.width) {
-        newX = canvas.width - platform.width;
-    }
-    
-    platform.x = newX;
+         const diff=this.mousex - platform.x;
+         const delta=Math.abs(diff)<2 ?diff:2;
+        let newX = mouse.x - platform.width / 2;
+        
+        if (newX < 0) {
+            newX = 0;
+        } else if (newX + platform.width > canvas.width) {
+            newX = canvas.width - platform.width;
+        }
+        
+        platform.x = newX + delta;
     }
 }
 
